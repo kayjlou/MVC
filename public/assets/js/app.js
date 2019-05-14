@@ -17,4 +17,14 @@ const getMovies = _ => {
     .catch(e => console.log(e));
 };
 
+//grabs search and runs fetch
+document.querySelector("#searchBtn").addEventListener("click", e => {
+  e.preventDefault();
+  fetch(`/movies/${document.querySelector("#title").value}`)
+    .then(r => r.json())
+    .then(movies => {
+      //updateHTML
+    })
+    .catch();
+});
 getMovies();
