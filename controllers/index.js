@@ -13,22 +13,39 @@ module.exports = {
     });
     return response;
   },
-  //Here are functions that contain mysql queries
-  // getMovies: _ => {
+  //Get movie function
+  async getMovie(t) {
+    let response = await new Promise((resolve, reject) => {
+      db.query("SELECT * FROM movies where ?", { movie: t }, (e, movies) => {
+        //What do we do with movies
+        if (e) reject(e);
+        //Gives function value
+        resolve(movies);
+      });
+    });
+    return response;
+  },
 
-  //   db.query("SELECT * FROM movies", (e, movies) => {
-  //     //What do we do with movies
-  //     if (e) throw e;
-  //     //Gives function value
-  //     return movies;
-  //   });
-  // },
-  getMovie: _ => {
-    db.query("SELECT * FROM movies WHERE ?");
+  async addMovie(movie) {
+    let response = await new Promise((resolve, reject) => {
+      db.query("INSERT INTO movies SET ?", { movie }, e => {
+        //What do we do with movies
+        if (e) reject(e);
+        //Gives function value
+        resolve(movies);
+      });
+    });
+    return response;
   },
-  addMovie: _ => {
-    "INSERT INTO movies SET ?";
+  async updateMovie(id, updates) {
+    let response = await new Promise((resolve, reject) => {
+      db.query("UPDATE movies SET ? WHERE ?", [updates, id], e => {
+        if (e) reject(e);
+        resolve();
+      });
+    });
   },
+
   updateMovie: _ => {
     "UPDATE movies SET ? WHERE ?";
   },
