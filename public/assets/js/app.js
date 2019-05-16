@@ -27,4 +27,6 @@ document.querySelector("#searchBtn").addEventListener("click", e => {
     })
     .catch();
 });
-getMovies();
+
+
+
